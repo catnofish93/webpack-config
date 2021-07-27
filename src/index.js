@@ -8,6 +8,7 @@ function component() {
   const btn = document.createElement('button');
   btn.innerHTML = 'click me and check the console'
   btn.onclick = printMe
+  element.appendChild(btn)
   const newIcon = new Image();
   newIcon.src = icon;
   element.appendChild(newIcon)

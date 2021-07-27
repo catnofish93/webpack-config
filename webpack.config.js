@@ -1,9 +1,23 @@
 const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 module.exports = {
-  entry: './src/index.js',
+  // entry: {
+  //   index: {
+  //     import:'./src/index.js',
+  //     dependOn: 'shared',
+  //   },
+  //   print: {
+  //     import: './src/print.js',
+  //     dependOn: 'shared',
+  //   },
+  //   shared: 'lodash'
+  // },
+  entry: './src/codeSplit.js',
   output: {
-    filename: "main.js",
-    path: path.resolve(__dirname, 'dist')
+    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, 'dist'),
+    clean: true
   },
   module: {
     rules: [
@@ -16,5 +30,21 @@ module.exports = {
         type: 'asset/resource',
       }
     ],
+  },
+  plugins: [
+      new HtmlWebpackPlugin({
+        title: '管理输出'
+      }),
+      new BundleAnalyzerPlugin()
+  ],
+  devtool: 'inline-source-map',
+  devServer: {
+    contentBase: './dist'
+  },
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'all',
+    },
   },
 }
