@@ -15,7 +15,7 @@ module.exports = {
   // },
   entry: './src/codeSplit.js',
   output: {
-    filename: "[name].bundle.js",
+    filename: "[name].[contenthash].js",
     path: path.resolve(__dirname, 'dist'),
     clean: true
   },
@@ -44,7 +44,7 @@ module.exports = {
   optimization: {
     runtimeChunk: 'single',
     splitChunks: {
-      chunks: 'all',
-    },
+      // chunks: 'all',
+    }
   },
 }
